@@ -2,7 +2,7 @@ package com.isi.webtp1.controller;
 
 import com.isi.webtp1.entity.Product;
 import com.isi.webtp1.entity.User;
-import com.isi.webtp1.service.UserService;
+import com.isi.webtp1.service.UserServiceIF;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceIF userService;
 
     @PostMapping // Create a new user
     public User createUser(@RequestBody User user) {
@@ -43,6 +43,7 @@ public class UserController {
 
     @DeleteMapping("/{id}") // Delete user by ID
     public User deleteUser(@PathVariable int id) {
+        
         return userService.deleteUser(id);
     }
 

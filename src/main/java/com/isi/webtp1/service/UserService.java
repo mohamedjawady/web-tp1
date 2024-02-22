@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService {
+public class UserService implements UserServiceIF {
     @Autowired
     private UserRepository repository;
 
@@ -19,19 +19,23 @@ public class UserService {
     private ProductRepository p_repository;
 
     // create operations
+    @Override
     public User saveUser(User user) {
         return repository.save(user);
     }
 
+    @Override
     public List<User> saveUsers(List<User> users) {
         return repository.saveAll(users);
     }
 
     // read operations
+    @Override
     public List<User> getUsers() {
         return repository.findAll();
     }
 
+    @Override
     public User getUserById(int id) {
         return repository.findById(id).orElse(null);
     }
@@ -41,6 +45,7 @@ public class UserService {
 //    }
 
     // update operations
+    @Override
     public User updateUser(User user){
         User u = repository.findById(user.getId()).orElse(null);
         u.setProducts(user.getProducts());
@@ -52,12 +57,20 @@ public class UserService {
     }
 
     // delete operations
+    @Override
     public User deleteUser(int id){
         User u = repository.findById(id).orElse(null);
+
+        // cascading deletion
+        for(Product p: u.getProducts()){
+            p_repository.deleteById(p.getId());
+        }
+
         repository.deleteById(id);
         return u;
     }
 
+    @Override
     public List<Product> addProductsToUser(int userId, List<Product> products) {
         User user = repository.findById(userId).orElse(null);
         if (user != null) {
