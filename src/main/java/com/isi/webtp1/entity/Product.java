@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +22,8 @@ public class Product {
     private int quantity;
     private double price;
 
-    @ManyToOne
+    // TODO: Ondelete cascade
+    @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
     private User user;

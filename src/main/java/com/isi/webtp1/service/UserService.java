@@ -34,6 +34,10 @@ public class UserService implements UserServiceIF {
     public List<User> getUsers() {
         return repository.findAll();
     }
+    // TODO: get user by name ... redefine the methods (rewsearch by name + by price(interval price(custom sql queries + redefinition)/ optional: filters))
+    // TODO: complete API + add images (prod: []liens)
+    // TODO: Spring-security: add JWT tokens
+    // TODO: watch spring-security video
 
     @Override
     public User getUserById(int id) {
