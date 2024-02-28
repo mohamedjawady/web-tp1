@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 public class UserService implements UserServiceIF {
+
     @Autowired
     private UserRepository repository;
 
@@ -20,37 +21,65 @@ public class UserService implements UserServiceIF {
     private ProductRepository p_repository;
 
     // create operations
+
+    /**
+     * Saves a new user.
+     * @param user The user to be saved.
+     * @return The saved user.
+     */
     @Override
     public User saveUser(User user) {
         return repository.save(user);
     }
 
+    /**
+     * Saves a list of users.
+     * @param users The list of users to be saved.
+     * @return The saved users.
+     */
     @Override
     public List<User> saveUsers(List<User> users) {
         return repository.saveAll(users);
     }
 
     // read operations
+
+    /**
+     * Retrieves all users.
+     * @return The list of all users.
+     */
     @Override
     public List<User> getUsers() {
         return repository.findAll();
     }
 
+    /**
+     * Retrieves all users without their passwords.
+     * @return The list of all users without passwords.
+     */
     public List<UserDto> findAllUsersWithoutPasswords() {
         return repository.findAllUsersWithoutPasswords();
     }
+
+    /**
+     * Retrieves a user by their ID.
+     * @param id The ID of the user to retrieve.
+     * @return The user with the specified ID, or null if not found.
+     */
     @Override
     public User getUserById(int id) {
         return repository.findById(id).orElse(null);
     }
 
-//    public User getUserByName(String name) {
-//        return repository.findByUsername(name);
-//    }
-
     // update operations
+
+    /**
+     * Updates an existing user.
+     * @param user The updated user data.
+     * @return The updated user.
+     */
     @Override
-    public User updateUser(User user){
+    public User updateUser(User user) {
         User u = repository.findById(user.getId()).orElse(null);
         u.setProducts(user.getProducts());
         u.setBio(user.getBio());
@@ -63,12 +92,18 @@ public class UserService implements UserServiceIF {
     }
 
     // delete operations
+
+    /**
+     * Deletes a user by their ID.
+     * @param id The ID of the user to delete.
+     * @return The deleted user, or null if not found.
+     */
     @Override
-    public User deleteUser(int id){
+    public User deleteUser(int id) {
         User u = repository.findById(id).orElse(null);
 
         // cascading deletion
-        for(Product p: u.getProducts()){
+        for (Product p : u.getProducts()) {
             p_repository.deleteById(p.getId());
         }
 
@@ -76,6 +111,12 @@ public class UserService implements UserServiceIF {
         return u;
     }
 
+    /**
+     * Adds products to a user.
+     * @param userId The ID of the user to add products to.
+     * @param products The list of products to add.
+     * @return The list of added products.
+     */
     @Override
     public List<Product> addProductsToUser(int userId, List<Product> products) {
         User user = repository.findById(userId).orElse(null);
@@ -88,6 +129,6 @@ public class UserService implements UserServiceIF {
             repository.save(user); // Save the user to update the association
             return products;
         }
-        return new ArrayList<Product>();
+        return new ArrayList<>();
     }
 }

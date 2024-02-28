@@ -16,46 +16,47 @@ public class UserController {
     @Autowired
     private UserServiceIF userService;
 
-    @PostMapping // Create a new user
+    // POST method to create a new user
+    @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.saveUser(user);
     }
 
-    @GetMapping // Get all users
+    // GET method to retrieve all users
+    @GetMapping
     public List<User> getAllUsers() {
         return userService.getUsers();
     }
 
-    @GetMapping("public") // Get all users
+    // GET method to retrieve public user information without passwords
+    @GetMapping("public")
     public List<UserDto> getPublicUserInfo() {
         return userService.findAllUsersWithoutPasswords();
     }
 
-
-    @GetMapping("/{id}") // Get user by ID
+    // GET method to retrieve a specific user by ID
+    @GetMapping("/{id}")
     public User getUserById(@PathVariable int id) {
         return userService.getUserById(id);
     }
 
-//    @GetMapping("/username/{name}") // Get user by username
-//    public User getUserByName(@PathVariable String name) {
-//        return userService.getUserByName(name);
-//    }
-
-    @PutMapping("/{id}") // Update user
+    // PUT method to update a specific user by ID
+    @PutMapping("/{id}")
     public User updateUser(@PathVariable int id, @RequestBody User user) {
         user.setId(id); // Ensure the ID in the path matches the ID in the body
         return userService.updateUser(user);
     }
 
-    @DeleteMapping("/{id}") // Delete user by ID
+    // DELETE method to delete a specific user by ID
+    @DeleteMapping("/{id}")
     public User deleteUser(@PathVariable int id) {
-        
         return userService.deleteUser(id);
     }
 
-    @PostMapping("/{userId}/products") // Add products to a user
+    // POST method to add products to a user
+    @PostMapping("/{userId}/products")
     public List<Product> addProductsToUser(@PathVariable int userId, @RequestBody List<Product> products) {
         return userService.addProductsToUser(userId, products);
     }
 }
+
