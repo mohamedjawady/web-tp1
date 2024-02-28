@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query("SELECT new com.isi.webtp1.dto.UserDto(u.id, u.username, u.firstName, u.lastName) FROM User u")
+    @Query("SELECT new com.isi.webtp1.dto.UserDto(u.id, u.username, u.firstName, u.lastName, u.bio, u.profileImage) FROM User u")
     List<UserDto> findAllUsersWithoutPasswords();
 }

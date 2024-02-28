@@ -53,6 +53,8 @@ public class UserService implements UserServiceIF {
     public User updateUser(User user){
         User u = repository.findById(user.getId()).orElse(null);
         u.setProducts(user.getProducts());
+        u.setBio(user.getBio());
+        u.setProfileImage(user.getProfileImage());
         u.setUsername(user.getUsername());
         u.setPassword(user.getPassword());
         u.setFirstName(user.getFirstName());
