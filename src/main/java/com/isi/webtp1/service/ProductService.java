@@ -43,8 +43,11 @@ public class ProductService implements ProductServiceIF {
     public Product updateProduct(Product product){
         Product e = repository.findById(product.getId()).orElse(null);
         e.setName(product.getName());
+        e.setDescription(product.getDescription());
         e.setPrice(product.getPrice());
         e.setQuantity(product.getQuantity());
+        e.setThumbnailImage(product.getThumbnailImage());
+        e.setImageURLs(product.getImageURLs());
         return repository.save(e);
     }
 

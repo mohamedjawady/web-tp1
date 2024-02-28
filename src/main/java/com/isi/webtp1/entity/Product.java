@@ -9,6 +9,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,10 +21,13 @@ public class Product {
     @GeneratedValue
     private int id;
     private String name;
+    private String description;
     private int quantity;
     private double price;
+    @ElementCollection
+    private List<String> imageURLs;
+    private String thumbnailImage;
 
-    // TODO: Ondelete cascade
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
     @JsonBackReference
