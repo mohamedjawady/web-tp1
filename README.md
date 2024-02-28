@@ -9,7 +9,7 @@ Welcome to the backend section of our Ecommerce Website project! This README pro
 - [Project Structure](#project-structure)
 - [Getting Started](#getting-started)
 - [Endpoints](#endpoints)
-- [Contributing](#contributing)
+- [Interacting with the API](#interacting-with-the-api)
 
 ## Overview
 
@@ -54,13 +54,48 @@ The backend provides the following endpoints:
 
 For detailed information on each endpoint, refer to the respective controller classes.
 
-## Contributing
+## Interacting with the API
 
-Contributions are welcome! If you'd like to contribute to the project, please follow these steps:
+You can interact with the API using cURL commands. Assuming the application is running on port 9999:
 
-1. Fork the repository.
-2. Create your feature branch (`git checkout -b feature/YourFeature`).
-3. Commit your changes (`git commit -am 'Add some feature'`).
-4. Push to the branch (`git push origin feature/YourFeature`).
-5. Create a new Pull Request.
+### Example cURL Commands:
 
+```bash
+# Create a new product
+curl -X POST -H "Content-Type: application/json" -d '{"name":"Product Name", "description":"Product Description", "price":10.99, "quantity":100}' http://localhost:9999/api/products
+
+# Retrieve all products
+curl http://localhost:9999/api/products
+
+# Retrieve a specific product by ID
+curl http://localhost:9999/api/products/{id}
+
+# Get products by price range
+curl http://localhost:9999/api/products/search?min=0&max=9999999
+
+# Update a product by ID
+curl -X PUT -H "Content-Type: application/json" -d '{"name":"Updated Product Name", "description":"Updated Product Description", "price":15.99, "quantity":50}' http://localhost:9999/api/products/{id}
+
+# Delete a product by ID
+curl -X DELETE http://localhost:9999/api/products/{id}
+
+# Get all users
+curl http://localhost:9999/api/users
+
+# Get public user info
+curl http://localhost:9999/api/users/public
+
+# Add a user
+curl -X POST -H "Content-Type: application/json" -d '{"username":"hbib", "password":"hbibpassword", "firstName":"mohamed habib", "lastName":"jaouadi"}' http://localhost:9999/api/users
+
+# Add products to user
+curl -X POST -H "Content-Type: application/json" -d '[{"name":"laptop","description":"some enriched text here","quantity":1,"price":9999,"soldStatus":false,"listedStatus":false,"thumbnailImage":"https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1771&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D","imageURLs":["#","#","#"]}]' http://localhost:9999/api/users/1/products
+
+# Get user by ID
+curl http://localhost:9999/api/users/{id}
+
+# Update user by ID
+curl -X PUT -H "Content-Type: application/json" -d '{"username":"hbib", "password":"hbibpassword3", "firstName":"mohamed habib", "lastName":"jaouadi"}' http://localhost:9999/api/users/{id}
+
+# Delete user by ID
+curl -X DELETE http://localhost:9999/api/users/{id}
