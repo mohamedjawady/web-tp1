@@ -1,5 +1,6 @@
 package com.isi.webtp1.controller;
 
+import com.isi.webtp1.dto.UserDto;
 import com.isi.webtp1.entity.Product;
 import com.isi.webtp1.entity.User;
 import com.isi.webtp1.service.UserServiceIF;
@@ -24,6 +25,12 @@ public class UserController {
     public List<User> getAllUsers() {
         return userService.getUsers();
     }
+
+    @GetMapping("public") // Get all users
+    public List<UserDto> getPublicUserInfo() {
+        return userService.findAllUsersWithoutPasswords();
+    }
+
 
     @GetMapping("/{id}") // Get user by ID
     public User getUserById(@PathVariable int id) {

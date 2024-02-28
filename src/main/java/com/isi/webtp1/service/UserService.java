@@ -1,5 +1,6 @@
 package com.isi.webtp1.service;
 
+import com.isi.webtp1.dto.UserDto;
 import com.isi.webtp1.entity.Product;
 import com.isi.webtp1.entity.User;
 import com.isi.webtp1.repository.ProductRepository;
@@ -34,11 +35,10 @@ public class UserService implements UserServiceIF {
     public List<User> getUsers() {
         return repository.findAll();
     }
-    // TODO: get user by name ... redefine the methods (rewsearch by name + by price(interval price(custom sql queries + redefinition)/ optional: filters))
-    // TODO: complete API + add images (prod: []liens)
-    // TODO: Spring-security: add JWT tokens
-    // TODO: watch spring-security video
 
+    public List<UserDto> findAllUsersWithoutPasswords() {
+        return repository.findAllUsersWithoutPasswords();
+    }
     @Override
     public User getUserById(int id) {
         return repository.findById(id).orElse(null);

@@ -1,5 +1,6 @@
 package com.isi.webtp1.service;
 
+import com.isi.webtp1.dto.UserDto;
 import com.isi.webtp1.entity.Product;
 import com.isi.webtp1.entity.User;
 
@@ -13,6 +14,8 @@ public interface UserServiceIF {
 
     // read operations
     List<User> getUsers();
+
+    public List<UserDto> findAllUsersWithoutPasswords();
 
     User getUserById(int id);
 
