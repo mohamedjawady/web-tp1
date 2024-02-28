@@ -24,6 +24,8 @@ public class Product {
     private String description;
     private int quantity;
     private double price;
+    private Boolean listedStatus;
+    private Boolean soldStatus;
     @ElementCollection
     private List<String> imageURLs;
     private String thumbnailImage;
