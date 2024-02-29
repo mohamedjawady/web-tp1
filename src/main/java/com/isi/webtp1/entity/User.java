@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +27,11 @@ public class User {
     private String firstName;
     private String lastName;
 
+    // primary contacts are of index 0
+    @ElementCollection
+    private List<String> emails;
+    @ElementCollection
+    private List<String> phoneNumbers;
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 @OneToMany(mappedBy = "user")
 @JsonManagedReference

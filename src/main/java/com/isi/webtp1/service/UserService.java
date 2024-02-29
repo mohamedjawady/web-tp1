@@ -88,6 +88,8 @@ public class UserService implements UserServiceIF {
         u.setPassword(user.getPassword());
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
+        u.setPhoneNumbers(user.getPhoneNumbers());
+        u.setEmails(user.getEmails());
         return repository.save(u);
     }
 
